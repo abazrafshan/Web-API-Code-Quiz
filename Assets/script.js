@@ -4,10 +4,22 @@ var time  = document.querySelector("#time");
 var startDiv  = document.querySelector("#start-div");
 var startButton = document.querySelector("#start");
 var question1 = document.querySelector("#question1");
+var rightButton1 = document.querySelector("#right1");
+var wrongButton1 = document.querySelector("#wrong1");
 var question2 = document.querySelector("#question2");
+var rightButton2 = document.querySelector("#right2");
+var wrongButton2 = document.querySelector("#wrong2");
 var question3 = document.querySelector("#question3");
+var rightButton3 = document.querySelector("#right3");
+var wrongButton3 = document.querySelector("#wrong3");
 var question4 = document.querySelector("#question4");
+var rightButton4 = document.querySelector("#right4");
+var wrongButton4 = document.querySelector("#wrong4");
 var question5 = document.querySelector("#question5");
+var rightButton5 = document.querySelector("#right5");
+var wrongButton5 = document.querySelector("#wrong5");
+var rightAnswer = document.querySelector("#right-answer");
+var wrongAnswer = document.querySelector("#wrong-answer");
 var questionHeader = document.querySelector("#question-header");
 var questionOptions = document.querySelector("#question-options");
 var gameOverDiv = document.querySelector("#game-over");
@@ -23,6 +35,9 @@ question2.style.display = "none";
 question3.style.display = "none";
 question4.style.display = "none";
 question5.style.display = "none";
+rightAnswer.style.display = "none";
+wrongAnswer.style.display = "none";
+
 
 function startQuiz(event){
     event.preventDefault();
@@ -31,5 +46,60 @@ function startQuiz(event){
 
 }
 
+function rightAnswerFunction1(event){
+    event.preventDefault();
+    rightAnswer.style.display = "block";
+    if (question2.style.display = "none"){
+        question2.style.display = "block";
+    }
+}
+
+function wrongAnswerFunction1(event){
+    event.preventDefault();
+    rightAnswer.style.display = "block";
+    if (question2.style.display = "none"){
+        question2.style.display = "block";
+    }
+}
+
+function rightAnswerFunction1(event){
+    event.preventDefault();
+    rightAnswer.style.display = "block";
+    if (question2.style.display = "none"){
+        question2.style.display = "block";
+    }
+}
+
+function wrongAnswerFunction1(event){
+    event.preventDefault();
+    rightAnswer.style.display = "block";
+    if (question2.style.display = "none"){
+        question2.style.display = "block";
+    }
+}
+
+function wrongAnswerFunction1(event){
+    event.preventDefault();
+    rightAnswer.style.display = "block";
+    if (question2.style.display = "none"){
+        question2.style.display = "block";
+    }
+}
+
+function gameOverFunction() {
+
+}
+
 
 startButton.addEventListener("click", startQuiz);
+wrongButton1.addEventListener("click", wrongAnswerFunction1);
+rightButton1.addEventListener("click", rightAnswerFunction1);
+wrongButton2.addEventListener("click", wrongAnswerFunction2);
+rightButton2.addEventListener("click", rightAnswerFunction2);
+wrongButton3.addEventListener("click", wrongAnswerFunction3);
+rightButton3.addEventListener("click", rightAnswerFunction3);
+wrongButton4.addEventListener("click", wrongAnswerFunction4);
+rightButton4.addEventListener("click", rightAnswerFunction4);
+wrongButton5.addEventListener("click", wrongAnswerFunction5);
+rightButton5.addEventListener("click", rightAnswerFunction5);
+

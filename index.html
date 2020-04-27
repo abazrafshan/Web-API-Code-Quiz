@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Event Delegation</title>
+        <link rel="stylesheet" href="Assets/style.css">
+    </head>
+    <body>
+        <div class = "scores"><a href = "highscores.html">View Highscores</a></div>
+        <div class = "timer">Time: <span id="time">0</span></div>
+        <div class = "container">
+            <div id="first-screen" class = "first">
+                <h1>Coding Quiz</h1>
+                <p>
+                    Take the following quic and test your knowledge with code-related questions. You will be working to a time limit and incorrect answers will penalize your time by 10 seconds. Good luck!
+                </p>
+                <button id = "start">Let's Begin</button>
+            </div>
+            <div id = "questions" class = "hide">
+                <h2 id = "question-header"></h2>
+                <div id = "question-options"></div>
+            </div>
+            <div id = "game-over" class = "hide">
+                <h2>Game over!</h2>
+                <p> Final Score: <span id="score"></span></p>
+                <p> Initials: <input type="text" id = "initials"></p>
+                <button id = "submit">Submit</button>
+            </div>
+            <div id = "results" class = "hide-results"></div>
+
+        </div>
+        <script src = Assets/script.js></script>
+    
+    </body>
+
+
+</html>

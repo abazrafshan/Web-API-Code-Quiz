@@ -1,0 +1,34 @@
+.scores {
+    color: indigo;
+    font-size: 16px;
+    width: 50%;
+    text-align: left;
+    float: left;
+
+}
+
+.timer {
+    font-size: 16px;
+    width: 50%;
+    text-align: right;
+    float: left;
+    margin-bottom: 20px;
+}
+
+.container {
+    text-align: center;
+    position: fixed;
+    left: 25%;
+    width: 50%;
+
+}
+
+p {
+    font-size: 20px;
+}
+
+button {
+    font-size: 16px;
+    color: white;
+    background: indigo;
+}

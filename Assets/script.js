@@ -5,19 +5,19 @@ var startDiv  = document.querySelector("#start-div");
 var startButton = document.querySelector("#start");
 var question1 = document.querySelector("#question1");
 var rightButton1 = document.querySelector("#right1");
-var wrongButton1 = document.querySelector("#wrong1");
+var wrongButton1 = document.querySelector(".wrong1");
 var question2 = document.querySelector("#question2");
 var rightButton2 = document.querySelector("#right2");
-var wrongButton2 = document.querySelector("#wrong2");
+var wrongButton2 = document.querySelector(".wrong2");
 var question3 = document.querySelector("#question3");
 var rightButton3 = document.querySelector("#right3");
-var wrongButton3 = document.querySelector("#wrong3");
+var wrongButton3 = document.querySelector(".wrong3");
 var question4 = document.querySelector("#question4");
 var rightButton4 = document.querySelector("#right4");
-var wrongButton4 = document.querySelector("#wrong4");
+var wrongButton4 = document.querySelector(".wrong4");
 var question5 = document.querySelector("#question5");
 var rightButton5 = document.querySelector("#right5");
-var wrongButton5 = document.querySelector("#wrong5");
+var wrongButton5 = document.querySelector(".wrong5");
 var rightAnswer = document.querySelector("#right-answer");
 var wrongAnswer = document.querySelector("#wrong-answer");
 var questionHeader = document.querySelector("#question-header");
@@ -43,87 +43,66 @@ function startQuiz(event){
     event.preventDefault();
     startDiv.style.display = "none";
     question1.style.display = "block";
-
 }
 
 function rightAnswerFunction1(event){
-    event.preventDefault();
     renderCorrect();
-    if (question2.style.display = "none"){
+        question1.style.display = "none";
         question2.style.display = "block";
+
     }
-}
 
 function wrongAnswerFunction1(event){
-    event.preventDefault();
     renderIncorrect();
-    if (question2.style.display = "none"){
+        question1.style.display = "none";
         question2.style.display = "block";
     }
-}
 
 function rightAnswerFunction2(event){
-    event.preventDefault();
     renderCorrect();
-    if (question2.style.display = "none"){
-        question2.style.display = "block";
-    }
+        question2.style.display = "none";
+        question3.style.display = "block";
 }
 
 function wrongAnswerFunction2(event){
-    event.preventDefault();
     renderIncorrect();
-    if (question2.style.display = "none"){
-        question2.style.display = "block";
-    }
+        question2.style.display = "none";
+        question3.style.display = "block";
 }
 
 function rightAnswerFunction3(event){
-    event.preventDefault();
     renderCorrect();
-    if (question2.style.display = "none"){
-        question2.style.display = "block";
+        question3.style.display = "none";
+        question4.style.display = "block";
     }
-}
 
 function wrongAnswerFunction3(event){
-    event.preventDefault();
     renderIncorrect();
-    if (question2.style.display = "none"){
-        question2.style.display = "block";
+        question3.style.display = "none";
+        question4.style.display = "block";
     }
-}
 
 function rightAnswerFunction4(event){
-    event.preventDefault();
     renderCorrect();
-    if (question2.style.display = "none"){
-        question2.style.display = "block";
+        question4.style.display = "none";
+        question5.style.display = "block";
     }
-}
+
 
 function wrongAnswerFunction4(event){
-    event.preventDefault();
     renderIncorrect();
-    if (question2.style.display = "none"){
-        question2.style.display = "block";
+        question4.style.display = "none";
+        question5.style.display = "block";
     }
-}
 
 function rightAnswerFunction5(event){
-    event.preventDefault();
     renderCorrect();
-    if (question2.style.display = "none"){
-        question2.style.display = "block";
-    }
+    gameOverFunction();
 }
 
 function wrongAnswerFunction5(event){
-    event.preventDefault();
     renderIncorrect();
-    if (question2.style.display = "none"){
-        question2.style.display = "block";
-    }
+    gameOverFunction();
 }
 
 function gameOverFunction() {
@@ -131,11 +110,13 @@ function gameOverFunction() {
 }
 
 function renderCorrect(){
+    event.preventDefault();
     rightAnswer.style.display = "block";
     wrongAnswer.style.display = "none";
 }
 
 function renderIncorrect(){
+    event.preventDefault();
     rightAnswer.style.display = "none";
     wrongAnswer.style.display = "block";
 }

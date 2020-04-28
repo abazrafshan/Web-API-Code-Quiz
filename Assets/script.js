@@ -27,7 +27,7 @@ var score = document.querySelector("#score");
 var initials = document.querySelector("#initials");
 var submitButton = document.querySelector("#submit");
 var results = document.querySelector("results");
-var startTime = 75;
+var secondsLeft = 75;
 
 gameOverDiv.style.display = "none";
 question1.style.display = "none";
@@ -38,9 +38,22 @@ question5.style.display = "none";
 rightAnswer.style.display = "none";
 wrongAnswer.style.display = "none";
 
+function setTime(){
+    var timerInterval = setInterval(function(){
+        secondsLeft--;
+        time.textContent = secondsLeft;
+
+        if(secondsLeft === 0){
+            clearInterval(timerInterval);
+            gameOverFunction();
+        }
+    }, 1000);
+
+}
 
 function startQuiz(event){
     event.preventDefault();
+    setTime();
     startDiv.style.display = "none";
     question1.style.display = "block";
 }
@@ -96,17 +109,18 @@ function wrongAnswerFunction4(event){
     }
 
 function rightAnswerFunction5(event){
-    renderCorrect();
     gameOverFunction();
+    renderCorrect();
 }
 
 function wrongAnswerFunction5(event){
-    renderIncorrect();
     gameOverFunction();
+    renderIncorrect();
 }
 
 function gameOverFunction() {
-
+    question5.style.display = "none";
+    gameOverDiv.style.display = "block";
 }
 
 function renderCorrect(){
@@ -120,7 +134,6 @@ function renderIncorrect(){
     rightAnswer.style.display = "none";
     wrongAnswer.style.display = "block";
 }
-
 
 startButton.addEventListener("click", startQuiz);
 wrongButton1.addEventListener("click", wrongAnswerFunction1);

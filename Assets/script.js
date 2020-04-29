@@ -25,7 +25,14 @@ var gameOverDiv = document.querySelector("#game-over");
 var score = document.querySelector("#score");
 var initials = document.querySelector("#initials");
 var submitButton = document.querySelector("#submit");
+var playAgain = document.querySelector("#play-again");
 var results = document.querySelector("#results");
+var highDcoreDiv = document.querySelector("#high-score-div");
+var firstPlace = document.querySelector("#first-place");
+var secondPlace = document.querySelector("#second-place");
+var thirdPlace = document.querySelector("#third-place");
+var fourthPlace = document.querySelector("#fourth-place");
+var fifthPlace = document.querySelector("#fifth-place");
 var secondsLeft = 75;
 var highScores = [];
 var gameOver;
@@ -60,6 +67,7 @@ function setTime(){
 
 function startQuiz(event){
     event.preventDefault();
+    secondsLeft = 75;
     setTime();
     startDiv.style.display = "none";
     question1.style.display = "block";
@@ -142,8 +150,8 @@ function rightAnswerFunction5(event){
 
 function wrongAnswerFunction5(event){
     if (event.target.matches(".wrong5")){
-        renderIncorrect();
         secondsLeft = secondsLeft - 15;
+        renderIncorrect();
         gameOverFunction();
     }
 }
@@ -151,6 +159,7 @@ function wrongAnswerFunction5(event){
 function gameOverFunction() {
     question5.style.display = "none";
     gameOverDiv.style.display = "block";
+    score.textContent = secondsLeft;
     gameOver = true;
     clearInterval(timerInterval);
 }
@@ -166,14 +175,34 @@ function submitFunction(event){
         } else { alert("success", "Score logged successfully");}
         localStorage.setItem("highScore", JSON.stringify(highScore));
         var lastUser = JSON.parse(localStorage.getItem("highScore"));
-        console.log(lastUser);
         highScores.push(lastUser);
-        console.log(highScores);
         gameOverDiv.style.display = "none";
-        results.style.display = "block";
+        // results.style.display = "block";
         wrongAnswer.style.display = "none";
         rightAnswer.style.display = "none";
+        highScores.sort(function(a,b){
+            return b.score - a.score
+        });
+        console.log(highScores);
+
     }
+}
+
+function viewHighScoresFunction(event){
+    results.style.display = "block";
+    gameOverDiv.style.display = "none";
+    question1.style.display = "none";
+    question2.style.display = "none";
+    question3.style.display = "none";
+    question4.style.display = "none";
+    question5.style.display = "none";
+    rightAnswer.style.display = "none";
+    wrongAnswer.style.display = "none";
+    firstPlace.textContent = "First Place - Initials: "+ highScores[0].initial + " Score: " + JSON.stringify(highScores[0].score);
+    secondPlace.textContent = "Second Place - Initials: "+ highScores[1].initial + " Score: " + JSON.stringify(highScores[1].score);
+    thirdPlace.textContent = "Third Place - Initials: "+ highScores[2].initial + " Score: " + JSON.stringify(highScores[2].score);
+    fourthPlace.textContent = "Fourth Place - Initials: "+ highScores[3].initial + " Score: " + JSON.stringify(highScores[3].score);
+    fifthPlace.textContent = "Fifth Place - Initials: "+ highScores[4].initial + " Score: " + JSON.stringify(highScores[4].score);
 }
 
 function renderCorrect(){
@@ -200,4 +229,5 @@ rightButton4.addEventListener("click", rightAnswerFunction4);
 wrongButton5.addEventListener("click", wrongAnswerFunction5);
 rightButton5.addEventListener("click", rightAnswerFunction5);
 submitButton.addEventListener("click", submitFunction);
-
+playAgain.addEventListener("click", startQuiz);
+scores.addEventListener("click", viewHighScoresFunction);

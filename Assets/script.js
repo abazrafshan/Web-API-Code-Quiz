@@ -25,12 +25,13 @@ var gameOverDiv = document.querySelector("#game-over");
 var score = document.querySelector("#score");
 var initials = document.querySelector("#initials");
 var submitButton = document.querySelector("#submit");
-var results = document.querySelector("results");
+var results = document.querySelector("#results");
 var secondsLeft = 75;
 var highScores = [];
 var gameOver;
 var timerInterval;
-console.log(gameOver);
+// var initial;
+// var score;
 
 gameOverDiv.style.display = "none";
 question1.style.display = "none";
@@ -40,6 +41,7 @@ question4.style.display = "none";
 question5.style.display = "none";
 rightAnswer.style.display = "none";
 wrongAnswer.style.display = "none";
+results.style.display = "none";
 
 function setTime(){
     timerInterval = setInterval(function(){
@@ -64,9 +66,6 @@ function startQuiz(event){
 }
 
 function rightAnswerFunction1(event){
-    // renderCorrect();
-    //     question1.style.display = "none";
-    //     question2.style.display = "block";
     if (event.target.matches("#right1")){
         renderCorrect();
         question1.style.display = "none";
@@ -75,10 +74,6 @@ function rightAnswerFunction1(event){
 }
 
 function wrongAnswerFunction1(event){
-    // renderIncorrect();
-    //     question1.style.display = "none";
-    //     question2.style.display = "block";
-    //     secondsLeft = secondsLeft - 15;
     if (event.target.matches(".wrong1")){
         renderIncorrect();
         question1.style.display = "none";
@@ -141,7 +136,6 @@ function wrongAnswerFunction4(event){
 function rightAnswerFunction5(event){
     if (event.target.matches("#right5")){
         renderCorrect();
-        // question5.style.display = "none";
         gameOverFunction();
     }
 }
@@ -149,7 +143,6 @@ function rightAnswerFunction5(event){
 function wrongAnswerFunction5(event){
     if (event.target.matches(".wrong5")){
         renderIncorrect();
-        // question5.style.display = "none";
         secondsLeft = secondsLeft - 15;
         gameOverFunction();
     }
@@ -160,7 +153,27 @@ function gameOverFunction() {
     gameOverDiv.style.display = "block";
     gameOver = true;
     clearInterval(timerInterval);
-    console.log(gameOver);
+}
+
+function submitFunction(event){
+    var highScore = {
+        score: secondsLeft,
+        initial: initials.value.trim()
+    };
+    if (event.target.matches("#submit")){
+        if (initials.length < 2){
+            alert("error", "Please input you initials");
+        } else { alert("success", "Score logged successfully");}
+        localStorage.setItem("highScore", JSON.stringify(highScore));
+        var lastUser = JSON.parse(localStorage.getItem("highScore"));
+        console.log(lastUser);
+        highScores.push(lastUser);
+        console.log(highScores);
+        gameOverDiv.style.display = "none";
+        results.style.display = "block";
+        wrongAnswer.style.display = "none";
+        rightAnswer.style.display = "none";
+    }
 }
 
 function renderCorrect(){
@@ -186,4 +199,5 @@ wrongButton4.addEventListener("click", wrongAnswerFunction4);
 rightButton4.addEventListener("click", rightAnswerFunction4);
 wrongButton5.addEventListener("click", wrongAnswerFunction5);
 rightButton5.addEventListener("click", rightAnswerFunction5);
+submitButton.addEventListener("click", submitFunction);
 

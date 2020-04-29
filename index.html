@@ -9,7 +9,7 @@
     </head>
     <body>
         <div class = "scores">View Highscores</div>
-        <div class = "timer">Time: <span id="time">75</span></div>
+        <div class = "timer float-right">Time: <span id="time">75</span></div>
         <div class = "container">
             <div id="start-div" class = "first">
                 <h1>Coding Quiz</h1>
@@ -78,16 +78,17 @@
                 <button id = "submit">Submit</button>
                 <button id = "play-again">Play Again?</button>
             </div>
-            <div id = "results" class = "hide-results">
+            <div id = "results">
                 <h2>Top 5 High Scores!</h2>
-                <div id = "high-score-div">
-                    <div><h4 id = "first-place"></h4></div>
+                <ul id = "high-score-div">
+                    <!-- <div><h4 id = "first-place"></h4></div>
                     <div><h4 id = "second-place"></h4></div>
                     <div><h4 id = "third-place"></h4></div>
                     <div><h4 id = "fourth-place"></h4></div>
-                    <div><h4 id = "fifth-place"></h4></div>
-                </div>
+                    <div><h4 id = "fifth-place"></h4></div> -->
+                </ul>
             </div>
+            <div id = "go-main-div"><button id= "go-main">Back to Main Page</button></div>
 
         </div>
         <script src = Assets/script.js></script>

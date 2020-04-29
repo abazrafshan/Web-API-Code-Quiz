@@ -37,3 +37,18 @@ button {
     color: gray;
     font-style: italic;
 }
+
+.float-right {
+    float: right;
+}
+
+li {
+    height: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+    background-color: indigo;
+    color: white;
+    font-size: 1.5em;
+    line-height: 1.5;
+  }

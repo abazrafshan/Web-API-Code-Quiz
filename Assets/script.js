@@ -27,18 +27,18 @@ var initials = document.querySelector("#initials");
 var submitButton = document.querySelector("#submit");
 var playAgain = document.querySelector("#play-again");
 var results = document.querySelector("#results");
-var highDcoreDiv = document.querySelector("#high-score-div");
+var highScoreDiv = document.querySelector("#high-score-div");
 var firstPlace = document.querySelector("#first-place");
 var secondPlace = document.querySelector("#second-place");
 var thirdPlace = document.querySelector("#third-place");
 var fourthPlace = document.querySelector("#fourth-place");
 var fifthPlace = document.querySelector("#fifth-place");
+var mainPageButton = document.querySelector("#go-main");
+var mainPageDiv = document.querySelector("#go-main-div");
 var secondsLeft = 75;
 var highScores = [];
 var gameOver;
 var timerInterval;
-// var initial;
-// var score;
 
 gameOverDiv.style.display = "none";
 question1.style.display = "none";
@@ -49,13 +49,14 @@ question5.style.display = "none";
 rightAnswer.style.display = "none";
 wrongAnswer.style.display = "none";
 results.style.display = "none";
+mainPageDiv.style.display = "none";
 
 function setTime(){
     timerInterval = setInterval(function(){
     secondsLeft--;
     time.textContent = secondsLeft;
     gameOver = false;
-    if(secondsLeft === 0){
+    if(secondsLeft < 1){
         clearInterval(timerInterval);
         alert("You ran out of time! No high score recorded for you, reload the page to try again");
     }
@@ -69,7 +70,10 @@ function startQuiz(event){
     event.preventDefault();
     secondsLeft = 75;
     setTime();
+    gameOverDiv.style.display = "none";
     startDiv.style.display = "none";
+    scores.style.display = "none";
+    timer.style.display = "block";
     question1.style.display = "block";
 }
 
@@ -143,7 +147,6 @@ function wrongAnswerFunction4(event){
 
 function rightAnswerFunction5(event){
     if (event.target.matches("#right5")){
-        renderCorrect();
         gameOverFunction();
     }
 }
@@ -151,13 +154,14 @@ function rightAnswerFunction5(event){
 function wrongAnswerFunction5(event){
     if (event.target.matches(".wrong5")){
         secondsLeft = secondsLeft - 15;
-        renderIncorrect();
         gameOverFunction();
     }
 }
 
 function gameOverFunction() {
     question5.style.display = "none";
+    wrongAnswer.style.display = "none";
+    rightAnswer.style.display = "none";
     gameOverDiv.style.display = "block";
     score.textContent = secondsLeft;
     gameOver = true;
@@ -165,31 +169,54 @@ function gameOverFunction() {
 }
 
 function submitFunction(event){
+    event.preventDefault();
     var highScore = {
         score: secondsLeft,
         initial: initials.value.trim()
     };
     if (event.target.matches("#submit")){
-        if (initials.length < 2){
-            alert("error", "Please input you initials");
-        } else { alert("success", "Score logged successfully");}
-        localStorage.setItem("highScore", JSON.stringify(highScore));
-        var lastUser = JSON.parse(localStorage.getItem("highScore"));
-        highScores.push(lastUser);
-        gameOverDiv.style.display = "none";
-        // results.style.display = "block";
-        wrongAnswer.style.display = "none";
-        rightAnswer.style.display = "none";
-        highScores.sort(function(a,b){
-            return b.score - a.score
-        });
-        console.log(highScores);
+        if (initials.value.length < 2){
+            alert("Error, please input at least two values as your initials");
+            return;
+        } 
+    highScores.push(highScore);
+    localStorage.setItem("highScore", JSON.stringify(highScore));
+    var lastUser = JSON.parse(localStorage.getItem("highScore"));
+    
+    gameOverDiv.style.display = "none";
+    wrongAnswer.style.display = "none";
+    rightAnswer.style.display = "none";
+    mainPageDiv.style.display = "block";
+    results.style.display = "block";
+    // highScoreDiv.style.display = "block";
+        // playAgain.style.display = "block";
+    highScores.sort(function(a,b){
+        return b.score - a.score
+    });
+    console.log(highScores);
+    for (var i = 0; i < highScores.length; i++){
+        // var highScore = highScores[i].score;
+        // var liScore = document.createElement("li");
+        // var liInitials = document.createElement("li");
+        var br = document.createElement("br");
+        var liScore = highScores[i].score;
+        var liInitials = highScores[i].initial;
 
+        console.log(liScore);
+        console.log(liInitials)
+        highScoreDiv.append(liInitials);
+        highScoreDiv.append(" - " + liScore);
+        highScoreDiv.append(br);
+    highScoreDiv.style.display = "block";
+    }
+    viewHighScoresFunction();
     }
 }
 
 function viewHighScoresFunction(event){
+    // event.preventDefault();
     results.style.display = "block";
+    mainPageDiv.style.display = "block";    
     gameOverDiv.style.display = "none";
     question1.style.display = "none";
     question2.style.display = "none";
@@ -198,21 +225,76 @@ function viewHighScoresFunction(event){
     question5.style.display = "none";
     rightAnswer.style.display = "none";
     wrongAnswer.style.display = "none";
-    firstPlace.textContent = "First Place - Initials: "+ highScores[0].initial + " Score: " + JSON.stringify(highScores[0].score);
-    secondPlace.textContent = "Second Place - Initials: "+ highScores[1].initial + " Score: " + JSON.stringify(highScores[1].score);
-    thirdPlace.textContent = "Third Place - Initials: "+ highScores[2].initial + " Score: " + JSON.stringify(highScores[2].score);
-    fourthPlace.textContent = "Fourth Place - Initials: "+ highScores[3].initial + " Score: " + JSON.stringify(highScores[3].score);
-    fifthPlace.textContent = "Fifth Place - Initials: "+ highScores[4].initial + " Score: " + JSON.stringify(highScores[4].score);
+    startDiv.style.display = "none";
+    timer.style.display = "none";
+//     for (var i = 0; i < highScores.length; i++){
+//         // var highScore = highScores[i].score;
+//         var liScore = document.createElement("li");
+//         var liInitials = document.createElement("li");
+//         var br = document.createElement("br");
+//         liScore = highScores[i].score;
+//         liInitials = highScores[i].initial;
+
+//         console.log(liScore);
+//         console.log(liInitials)
+//         highScoreDiv.append(liInitials);
+//         highScoreDiv.append(" - " + liScore);
+//         highScoreDiv.append(br);
+//     highScoreDiv.style.display = "block";
+// } 
+}
+    console.log(highScoreDiv);
+
+    // if (highscores[0] = undefined){
+    //     firstPlace.textContent = "First Place - Initials: "+ highScores[0].initial + " Score: " + JSON.stringify(highScores[0].score)}
+    // else if(highscores[1] = undefined){
+    //     secondPlace.textContent = "Second Place - Initials: "+ highScores[1].initial + " Score: " + JSON.stringify(highScores[1].score)}
+    // else if (highscores[2] != undefined){
+    //     thirdPlace.textContent = "Third Place - Initials: "+ highScores[2].initial + " Score: " + JSON.stringify(highScores[2].score)}
+    // else if (highscores[3] != undefined){
+    //     fourthPlace.textContent = "Fourth Place - Initials: "+ highScores[3].initial + " Score: " + JSON.stringify(highScores[3].score)}
+    // else if (highscores[4] != undefined){
+    //     fifthPlace.textContent = "Fifth Place - Initials: "+ highScores[4].initial + " Score: " + JSON.stringify(highScores[4].score)}
+    // else {alert("Something is wrong with the viewhighscoresfunction")};
+//     }
+// }
+
+// function renderHighScores(){
+//     results.innerHTML = "";
+//     for (var i = 0; i < highScores.length; i++){
+//         var highScore = highScores[i];
+//         console.log(highScore);
+
+//         var li = document.createElement("li");
+//         li.textContent = highscore;
+//         li.setAttribute("data-index", i);
+//         results.appendChild(li);
+//     }
+// }
+
+function mainPageFunction(event) {
+    startDiv.style.display = "block";
+    scores.style.display = "block"
+    gameOverDiv.style.display = "none";
+    question1.style.display = "none";
+    question2.style.display = "none";
+    question3.style.display = "none";
+    question4.style.display = "none";
+    question5.style.display = "none";
+    rightAnswer.style.display = "none";
+    wrongAnswer.style.display = "none";
+    results.style.display = "none";
+    mainPageDiv.style.display = "none";
+    secondsLeft = 75;
+    gameOver = true;
 }
 
 function renderCorrect(){
-    event.preventDefault();
     rightAnswer.style.display = "block";
     wrongAnswer.style.display = "none";
 }
 
 function renderIncorrect(){
-    event.preventDefault();
     rightAnswer.style.display = "none";
     wrongAnswer.style.display = "block";
 }
@@ -231,3 +313,4 @@ rightButton5.addEventListener("click", rightAnswerFunction5);
 submitButton.addEventListener("click", submitFunction);
 playAgain.addEventListener("click", startQuiz);
 scores.addEventListener("click", viewHighScoresFunction);
+mainPageButton.addEventListener("click", mainPageFunction);

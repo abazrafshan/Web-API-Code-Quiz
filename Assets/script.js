@@ -179,28 +179,25 @@ function submitFunction(event){
             alert("Error, please input at least two values as your initials");
             return;
         } 
+        console.log(highScore);
     highScores.push(highScore);
-    localStorage.setItem("highScore", JSON.stringify(highScore));
-    var lastUser = JSON.parse(localStorage.getItem("highScore"));
-    
+    localStorage.setItem("highScore", JSON.stringify(highScores));
+    var lastUsers = JSON.parse(localStorage.getItem("highScore"));
+    console.log(lastUsers +"1");
     gameOverDiv.style.display = "none";
     wrongAnswer.style.display = "none";
     rightAnswer.style.display = "none";
     mainPageDiv.style.display = "block";
     results.style.display = "block";
-    // highScoreDiv.style.display = "block";
-        // playAgain.style.display = "block";
     highScores.sort(function(a,b){
         return b.score - a.score
     });
+    highScoreDiv.innerHTML = "";
     console.log(highScores);
-    for (var i = 0; i < highScores.length; i++){
-        // var highScore = highScores[i].score;
-        // var liScore = document.createElement("li");
-        // var liInitials = document.createElement("li");
+    for (var i = 0; i < lastUsers.length; i++){
         var br = document.createElement("br");
-        var liScore = highScores[i].score;
-        var liInitials = highScores[i].initial;
+        var liScore = lastUsers[i].score;
+        var liInitials = lastUsers[i].initial;
 
         console.log(liScore);
         console.log(liInitials)
@@ -214,7 +211,6 @@ function submitFunction(event){
 }
 
 function viewHighScoresFunction(event){
-    // event.preventDefault();
     results.style.display = "block";
     mainPageDiv.style.display = "block";    
     gameOverDiv.style.display = "none";
@@ -227,50 +223,7 @@ function viewHighScoresFunction(event){
     wrongAnswer.style.display = "none";
     startDiv.style.display = "none";
     timer.style.display = "none";
-//     for (var i = 0; i < highScores.length; i++){
-//         // var highScore = highScores[i].score;
-//         var liScore = document.createElement("li");
-//         var liInitials = document.createElement("li");
-//         var br = document.createElement("br");
-//         liScore = highScores[i].score;
-//         liInitials = highScores[i].initial;
-
-//         console.log(liScore);
-//         console.log(liInitials)
-//         highScoreDiv.append(liInitials);
-//         highScoreDiv.append(" - " + liScore);
-//         highScoreDiv.append(br);
-//     highScoreDiv.style.display = "block";
-// } 
 }
-    console.log(highScoreDiv);
-
-    // if (highscores[0] = undefined){
-    //     firstPlace.textContent = "First Place - Initials: "+ highScores[0].initial + " Score: " + JSON.stringify(highScores[0].score)}
-    // else if(highscores[1] = undefined){
-    //     secondPlace.textContent = "Second Place - Initials: "+ highScores[1].initial + " Score: " + JSON.stringify(highScores[1].score)}
-    // else if (highscores[2] != undefined){
-    //     thirdPlace.textContent = "Third Place - Initials: "+ highScores[2].initial + " Score: " + JSON.stringify(highScores[2].score)}
-    // else if (highscores[3] != undefined){
-    //     fourthPlace.textContent = "Fourth Place - Initials: "+ highScores[3].initial + " Score: " + JSON.stringify(highScores[3].score)}
-    // else if (highscores[4] != undefined){
-    //     fifthPlace.textContent = "Fifth Place - Initials: "+ highScores[4].initial + " Score: " + JSON.stringify(highScores[4].score)}
-    // else {alert("Something is wrong with the viewhighscoresfunction")};
-//     }
-// }
-
-// function renderHighScores(){
-//     results.innerHTML = "";
-//     for (var i = 0; i < highScores.length; i++){
-//         var highScore = highScores[i];
-//         console.log(highScore);
-
-//         var li = document.createElement("li");
-//         li.textContent = highscore;
-//         li.setAttribute("data-index", i);
-//         results.appendChild(li);
-//     }
-// }
 
 function mainPageFunction(event) {
     startDiv.style.display = "block";

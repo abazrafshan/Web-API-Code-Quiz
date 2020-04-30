@@ -35,6 +35,7 @@ var fourthPlace = document.querySelector("#fourth-place");
 var fifthPlace = document.querySelector("#fifth-place");
 var mainPageButton = document.querySelector("#go-main");
 var mainPageDiv = document.querySelector("#go-main-div");
+var clearButton = document.querySelector("#clear");
 var secondsLeft = 75;
 var highScores = [];
 var gameOver;
@@ -50,6 +51,7 @@ rightAnswer.style.display = "none";
 wrongAnswer.style.display = "none";
 results.style.display = "none";
 mainPageDiv.style.display = "none";
+clearButton.style.display = "none";
 
 function setTime(){
     timerInterval = setInterval(function(){
@@ -189,9 +191,9 @@ function submitFunction(event){
     rightAnswer.style.display = "none";
     mainPageDiv.style.display = "block";
     results.style.display = "block";
-    highScores.sort(function(a,b){
-        return b.score - a.score
-    });
+    // highScores.sort(function(a,b){
+    //     return b.score - a.score
+    // });
     highScoreDiv.innerHTML = "";
     console.log(highScores);
     for (var i = 0; i < lastUsers.length; i++){
@@ -205,13 +207,18 @@ function submitFunction(event){
         highScoreDiv.append(" - " + liScore);
         highScoreDiv.append(br);
     highScoreDiv.style.display = "block";
+    
     }
+    highScores.sort(function(a,b){
+        return b.score - a.score
+    });
     viewHighScoresFunction();
     }
 }
 
 function viewHighScoresFunction(event){
     results.style.display = "block";
+    clearButton.style.display = "block";
     mainPageDiv.style.display = "block";    
     gameOverDiv.style.display = "none";
     question1.style.display = "none";
@@ -223,6 +230,7 @@ function viewHighScoresFunction(event){
     wrongAnswer.style.display = "none";
     startDiv.style.display = "none";
     timer.style.display = "none";
+
 }
 
 function mainPageFunction(event) {
@@ -240,6 +248,15 @@ function mainPageFunction(event) {
     mainPageDiv.style.display = "none";
     secondsLeft = 75;
     gameOver = true;
+}
+
+function clearButtonFunction(event){
+    window.localStorage.clear();
+    highScoreDiv.innerHTML = "";
+    lastUsers.innerHTML = "";
+    highScores.innerHTML = "";
+    liScore.innerHTML = "";
+    liInitials.innerHTML = "";
 }
 
 function renderCorrect(){
@@ -267,3 +284,5 @@ submitButton.addEventListener("click", submitFunction);
 playAgain.addEventListener("click", startQuiz);
 scores.addEventListener("click", viewHighScoresFunction);
 mainPageButton.addEventListener("click", mainPageFunction);
+clearButton.addEventListener("click", clearButtonFunction);
+

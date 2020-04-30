@@ -4,26 +4,35 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Event Delegation</title>
+        <title>Code Quiz</title>
         <link rel="stylesheet" href="Assets/style.css">
     </head>
     <body>
+        <!-- User can select "scores" div to view scores saved in localstorage -->
         <div class = "scores">View Highscores</div>
+        <!-- Timer on top right hand side of screen that starts at 75 seconds for each game -->
         <div class = "timer float-right">Time: <span id="time">75</span></div>
         <div class = "container">
+            <!-- First div that user sees when program is ran, all other divs are hidden until user clicks "start" button -->
             <div id="start-div" class = "first">
                 <h1>Coding Quiz</h1>
                 <p>
                     Take the following quiz and test your knowledge with code-related questions. You will be working to a time limit and incorrect answers will penalize your time by 15 seconds. This quiz consists of 5 questions, if you finish the quiz with time left on the clock, the remaining time will be saved as your score. No score will be saved if time limit reaches 0. Good luck!
                 </p>
+                <!-- User begins code quiz by selecting "start button", divs appear sequentially as user progresses through game -->
                 <button id = "start">Let's Begin</button>
             </div>
+            <!-- Div with first question and 4 possible answers, with classes/id's tied to each button that are targetted in javascript -->
             <div id = "question1">
+                <!-- Question header -->
                 <h2 class = "question-header">Commonly used data types DO NOT include ____:</h2>
+                <!-- 4 possible answers to select for all 5 questions in this quiz  -->
                 <div class = "question-options1">
+                    <!-- If user selects button with "wrong1" id, next question is prompted with 15 second penalty to timer. This same logic applies to all incorrect answers -->
                     <button class = "wrong1">Strings</button></br>
                     <button class = "wrong1">Booleans</button></br>
                     <button class = "wrong1">Numbers</button></br>
+                    <!-- If user selects button with "right1" id, next question is prompted without penalty to timer. This same logic applies to all correct answers -->
                     <button id = "right1">Alerts</button></br>
                 </div>
             </div>
@@ -63,32 +72,33 @@
                     <button class = "wrong5">Git Bash</button></br>
                 </div>
             </div>
-            
+            <!-- If user answers a question correctly, a message appears stating the user is correct -->
             <div id = "right-answer" class = "grayText">
                 <h5>You are correct</h5>
             </div>
+            <!-- If user answers a question incorrectly, a message appears stating the user is incorrect -->
             <div id = "wrong-answer" class = "grayText">
                 <h5>You are incorrect</h5>
             </div>
-
-            <div id = "game-over" class = "hide">
+            <!-- When user answers question 5, question5 div hides and the gameOverDiv appears showing user their score which is the number of seconds left in the timer at the end of the game -->
+            <div id = "game-over">
                 <h2>Game over!</h2>
+                <!-- Score equals number of seconds left on timer -->
                 <p> Final Score: <span id="score"></span></p>
                 <p> Initials: <input type="text" id = "initials"></p>
+                <!-- When user enters a value for initials that is larger than 1 character and clicks submit, the value is stored in local storage and user is taken to high scores page-->
                 <button id = "submit">Submit</button>
+                <!-- If user doesn't want to enter their score but rather play the game again, they can select the Play Again button -->
                 <button id = "play-again">Play Again?</button>
             </div>
+            <!-- Div that lists the high scores saved in localstorage -->
             <div id = "results">
-                <h2>Top 5 High Scores!</h2>
+                <h2>High Scores!</h2>
                 <ul id = "high-score-div">
-                    <!-- <div><h4 id = "first-place"></h4></div>
-                    <div><h4 id = "second-place"></h4></div>
-                    <div><h4 id = "third-place"></h4></div>
-                    <div><h4 id = "fourth-place"></h4></div>
-                    <div><h4 id = "fifth-place"></h4></div> -->
                 </ul>
             </div>
-            <div id = "go-main-div"><button id= "go-main">Back to Main Page</button></div>
+            <!-- On highscore page user can select button to go back to the startDiv or can click the clear button to clear list of highscores -->
+            <div id = "go-main-div"><button id= "go-main">Back to Main Page</button><button id = "clear">Clear Highscores</button></div>
 
         </div>
         <script src = Assets/script.js></script>

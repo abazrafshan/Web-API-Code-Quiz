@@ -202,21 +202,27 @@ function submitFunction(event){
     mainPageDiv.style.display = "block";
     results.style.display = "block";
     // Resets highScoreDiv before running for loop to precent program from appending over previous iterations of listing user initials and high scores
-    highScoreDiv.innerHTML = "";
+    results.innerHTML = "<h2>High Scores</h2>";
     // Accesses the high score objects and appends them to the HighScoreDiv, which is then made visible to the user
+
     for (var i = 0; i < lastUsers.length; i++){
         var br = document.createElement("br");
         var liScore = lastUsers[i].score;
         var liInitials = lastUsers[i].initial;
-        highScoreDiv.append(liInitials);
-        highScoreDiv.append(" - " + liScore);
-        highScoreDiv.append(br);
-        highScoreDiv.style.display = "block";
+        results.append(liInitials);
+        results.append(" - " + liScore);
+        results.append(br);
+        results.style.display = "block";
+        highScores.sort(function(a,b){
+            return b.score - a.score
+        });
     }
     // User prompted to view high scores page
     viewHighScoresFunction();
+    results.style.display = "block";
     }
 }
+
 // When thsi function is called user can see results, and can click clear button to clear high scores or main page button to return to the main page
 function viewHighScoresFunction(event){
     results.style.display = "block";
@@ -258,6 +264,7 @@ function clearButtonFunction(event){
     highScores.innerHTML = "";
     liScore.innerHTML = "";
     liInitials.innerHTML = "";
+    results.innerHTML = "";
 }
 // If user answers a question correctly, a message appears informing the user they made the correct selection
 function renderCorrect(){
